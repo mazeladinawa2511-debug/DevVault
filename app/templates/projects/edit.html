@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Project</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.name.label }}
+        {{ form.name() }}
+        {% for error in form.name.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.description.label }}
+        {{ form.description() }}
+        {% for error in form.description.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
+<a href="{{ url_for('projects.index') }}">Cancel</a>
+{% endblock %}

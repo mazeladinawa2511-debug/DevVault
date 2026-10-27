@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Project | DevVault</title>
+</head>
+<body>
+    <h1>Create a project</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="post">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name() }}
+            {% for error in form.name.errors %}
+                <small>{{ error }}</small>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=5) }}
+            {% for error in form.description.errors %}
+                <small>{{ error }}</small>
+            {% endfor %}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    <a href="{{ url_for('projects.index') }}">Back to projects</a>
+</body>
+</html>

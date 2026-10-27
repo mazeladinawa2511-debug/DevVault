@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Projects | DevVault</title>
+</head>
+<body>
+    <h1>My Projects</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+
+    <p>
+        Signed in as {{ current_user.username }}
+    </p>
+
+    <p>
+        <a href="{{ url_for('projects.create') }}">Create project</a>
+    </p>
+
+    {% if projects %}
+        <ul>
+        {% for project in projects %}
+            <li>
+                <strong>{{ project.name }}</strong>
+                <p>{{ project.description }}</p>
+                <small>Status: {{ project.status }}</small>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no projects yet.</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('auth.logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit">Sign out</button>
+    </form>
+</body>
+</html>

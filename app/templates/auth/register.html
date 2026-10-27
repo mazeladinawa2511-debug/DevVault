@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account | DevVault</title>
+</head>
+<body>
+    <h1>Create your DevVault account</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="post">
+        {{ form.hidden_tag() }}
+
+        <p>{{ form.username.label }}<br>{{ form.username() }}</p>
+        <p>{{ form.email.label }}<br>{{ form.email() }}</p>
+        <p>{{ form.password.label }}<br>{{ form.password() }}</p>
+        <p>{{ form.confirm_password.label }}<br>{{ form.confirm_password() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    <p>Already registered? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+</body>
+</html>
